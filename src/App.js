@@ -11,15 +11,20 @@ class App extends Component {
 	};
 
 	handleCourseUpdate = e => {
-		// console.log("input course =  ", e.target.value);
 		this.setState({
 			current: e.target.value,
 		});
 	};
+
 	handleAddCourse = e => {
 		e.preventDefault();
-		console.log(` current: ${this.state.current}`);
-		// alert(this.state.current);
+		let currentCourse = this.state.current;
+		let courses = this.state.courses;
+		courses.push({ courseName: currentCourse });
+		this.setState({
+			courses,
+			current: "" /*set current to empty string to handle input value to equal empty string after submit */,
+		});
 	};
 	render() {
 		const { courses } = this.state;
@@ -31,7 +36,11 @@ class App extends Component {
 			<div className='container'>
 				<h1>App Component</h1>
 
-				<CourseForm updateCourse={this.handleCourseUpdate} submitCourseValue={this.handleAddCourse} />
+				<CourseForm
+					currentCourse={this.state.current} /*send current as props to make input value = " " */
+					updateCourse={this.handleCourseUpdate}
+					submitCourseValue={this.handleAddCourse}
+				/>
 
 				<div>
 					Courses names are : <ul>{coursesList}</ul>
