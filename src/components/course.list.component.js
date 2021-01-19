@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import "./course.list.component.css";
 
 class CourseList extends Component {
 	render() {
@@ -7,12 +8,16 @@ class CourseList extends Component {
 
 		return (
 			<Fragment>
-				<li className='row'>
-					<span className='m-2'>{this.props.courseDetails.courseName}</span>
-					<button className='btn-danger m-2 w-25' onClick={this.props.deleteCourse}>
-						Delete
-					</button>
-					<button className='btn-warning m-2 w-25'>Update</button>
+				<li className='mt-2 bg-light'>
+					<span className='strong'>{this.props.courseDetails.courseName}</span>
+					<div className='row'>
+						<button className='btn-danger m-2 w-25' onClick={() => this.props.deleteCourse(this.props.index)}>
+							{" "}
+							{/* arrow function to invoke the handler */}
+							Delete
+						</button>
+						<button className='btn-warning m-2 w-25'>Update</button>{" "}
+					</div>
 				</li>
 			</Fragment>
 		);

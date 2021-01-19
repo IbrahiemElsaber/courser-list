@@ -1,6 +1,6 @@
 // import React from "react";
 import React, { Component } from "react";
-// import "./App.css";
+import "./App.css";
 import CourseForm from "./components/course.form.component";
 import CourseList from "./components/course.list.component";
 
@@ -9,6 +9,7 @@ class App extends Component {
 		// courses: [],
 		courses: [{ courseName: "HTML" }, { courseName: "Js" }, { courseName: "CSS" }],
 		current: "",
+		display: "d-none",
 	};
 
 	//handle update course
@@ -23,11 +24,18 @@ class App extends Component {
 		e.preventDefault();
 		let currentCourse = this.state.current;
 		let courses = this.state.courses;
-		courses.push({ courseName: currentCourse }); //update courses array after adding new course object
-		this.setState({
-			courses,
-			current: "" /*set current to empty string to handle input value to equal empty string after submit */,
-		});
+		if (currentCourse === "") {
+			this.setState({
+				display: "d-block",
+			});
+		} else {
+			courses.push({ courseName: currentCourse }); //update courses array after adding new course object
+			this.setState({
+				courses,
+				current: "" /*set current to empty string to handle input value to equal empty string after submit */,
+				display: "d-none",
+			});
+		}
 	};
 
 	//handle delete course
@@ -54,11 +62,10 @@ class App extends Component {
 					currentCourse={this.state.current} /*send current as props to make input value = " " */
 					updateCourse={this.handleCourseUpdate}
 					submitCourseValue={this.handleAddCourse}
+					displayMessage={this.state.display}
 				/>
 
-				<div>
-					Courses names are : <ul>{coursesList}</ul>
-				</div>
+				<ol>{coursesList}</ol>
 			</div>
 		);
 	}
