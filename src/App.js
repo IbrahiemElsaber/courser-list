@@ -40,7 +40,7 @@ class App extends Component {
 
 	//handle delete course
 	handleDeleteCourse = index => {
-		console.log(`index= ${index}`);
+		// console.log(`index= ${index}`);
 		let courses = this.state.courses;
 		courses.splice(index, 1);
 		this.setState({
